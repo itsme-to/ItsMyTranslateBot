@@ -36,6 +36,7 @@ export class Manager extends Client<true> {
     this.service.command = new CommandService(this);
     this.service.user = new UserService(this);
     await this.service.command.initialize();
+    await this.service.user.initialize();
 
     this.service.event.initializeEvents();
     await this.loadDatabaseModels();

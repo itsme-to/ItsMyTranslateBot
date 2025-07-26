@@ -8,6 +8,11 @@ import { Service } from '../../interfaces/index.js';
  */
 export default class UserService extends Service {
 
+  async initialize() {
+    this.client.database.addModels([User]);
+    await User.sync({ alter: true });
+  }
+
   async findOrNull(userId: string): Promise<User | null> {
     return User.findOne({ where: { id: userId } });
   }
