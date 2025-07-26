@@ -38,45 +38,15 @@ export default class CommandService extends Service {
   }
 
   public async deployCommands() {
-    const commmandGuilds = new Collection<string, any>();
     const commandData = [...this.commands.values()]
-      .map(command => {
-        const data: any = command.builder.toJSON();
+      .map(command => command.builder.toJSON());
 
-        if (data.guilds) {
-          data.guilds.forEach((guildId: string) => {
-            if (!commmandGuilds.has(guildId)) {
-              commmandGuilds.set(guildId, []);
-            }
-            commmandGuilds.get(guildId).push(data);
-          });
-          return null;
-        }
-
-        return data;
-      });
-
-    const token = process.env.DISCORD_TOKEN;
-    const clientId = process.env.DISCORD_CLIENT_ID;
-
-    if (!token || !clientId) {
-      this.client.logger.error('No token or client ID provided in the environment variables.');
-      return;
-    }
-
+    const token = process.env.DISCORD_TOKEN!;
     const rest = new REST().setToken(token);
 
     try {
       this.client.logger.info('Registering slash commands.');
-
-      for (const [guildId, commands] of commmandGuilds) {
-        await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
-          body: commands,
-        });
-        this.client.logger.info(`Successfully registered slash commands for guild: ${guildId}`);
-      }
-
-      await rest.put(Routes.applicationCommands(clientId), {
+      await rest.put(Routes.applicationCommands(this.client.user.id), {
         body: commandData,
       });
 
