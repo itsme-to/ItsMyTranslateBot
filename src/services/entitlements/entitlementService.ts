@@ -9,6 +9,7 @@ export default class EntitlementService extends Service {
   }
 
   async consumeEntitlement(entitlement: Entitlement) {
+    if (entitlement.consumed) return;
     this.client.logger.debug(`Consuming entitlement ${entitlement.id} for user ${entitlement.userId}`);
     console.log(entitlement)
 
