@@ -26,14 +26,17 @@ not-enough-credits:
       content: |
         Oopsie! You do not have enough credits to do this action! You need %price% credits to make it work.
         Right now, you have %user_credits% credits
+    - type: 'separator'
+      divider: false
+      spacing: 2
     - type: 'container'
       components:
         - type: 'text-display'
-          content: "Beep-boop~ You can now buy shiny products directly on Discord!"
+          content: "### Beep-boop~ You can now buy shiny credits directly on Discord!"
         - type: 'section'
           components:
             - type: 'text-display'
-              content: "Small but mighty ⚡"
+              content: "Small credit boost ⚡"
           accessory:
             type: 'button'
             style: 'premium'
@@ -41,7 +44,7 @@ not-enough-credits:
         - type: 'section'
           components:
             - type: 'text-display'
-              content: "Bigger, stronger 🌟"
+              content: "More credits, more fun 🌟"
           accessory:
             type: 'button'
             style: 'premium'
@@ -49,7 +52,7 @@ not-enough-credits:
         - type: 'section'
           components:
             - type: 'text-display'
-              content: "Ultimate power 🚀"
+              content: "Mega credit pack 🚀"
           accessory:
             type: 'button'
             style: 'premium'
@@ -61,63 +64,34 @@ translate-confirmation:
       components:
         - type: 'text-display'
           content: |
-            Did you want to translate `%file_name%` in `%language%` for **%price%** credits ?
+            Do you want me to translate `%file_name%` into `%language%` for **%price%** credits ?
             You currently have **%user_credits%** credits.
       accessory:
         type: 'button'
         style: 'success'
         emoji: '✅'
-        label: "Confirm"
+        label: "Yes, translate it"
         custom-id: 'translate_confirm'
-    - type: 'separator'
-      divider: false
-      spacing: 2
-    - type: 'container'
-      components:
-        - type: 'text-display'
-          content: "### Beep-boop~ You can now buy shiny products directly on Discord!"
-        - type: 'section'
-          components:
-            - type: 'text-display'
-              content: "Small but mighty ⚡"
-          accessory:
-            type: 'button'
-            style: 'premium'
-            sku-id: '1260276010776133782'
-        - type: 'section'
-          components:
-            - type: 'text-display'
-              content: "Bigger, stronger 🌟"
-          accessory:
-            type: 'button'
-            style: 'premium'
-            sku-id: '1260276162639167548'
-        - type: 'section'
-          components:
-            - type: 'text-display'
-              content: "Ultimate power 🚀"
-          accessory:
-            type: 'button'
-            style: 'premium'
-            sku-id: '1260276278305751050'
 
 translation-started:
   components:
     - type: 'text-display'
-      content: "Translation started! ..."
+      content: |
+        I’ve started translating your file into %language%~ Please wait a moment! ⏳
+        -# File: %file_name%, Cost: %price% credits, Mode: %mode%
 
 translation-progress:
   components:
     - type: 'text-display'
       content: |
-        Translation in progress... %percent%
-        -# (%current%/%total%) section translated
+        I’ve already translated part of the file! I’m currently at %percent%...
+        -# File: %file_name%, Cost: %price% credits, Mode: %mode%, Status: %current%/%total%
 
 translation-finished:
   components:
     - type: 'text-display'
       content: |
-        I finished translating your file!
+        I’ve finished translating your awesome file! 
 
 translation-success:
   ephemeral: true
@@ -141,7 +115,9 @@ translation-failed:
     - type: 'section'
       components:
         - type: 'text-display'
-          content: "Translation failed. Please try again later or contact support. (Cost: %price% credits)"
+          content: |
+            Oops, an error occurred during the translation and I couldn’t fix it!
+            -# File: %file_name%, Cost: %price% credits, Mode: %mode%
       accessory:
         type: 'button'
         style: 'link'
@@ -156,15 +132,34 @@ give-credits:
 credits:
   ephemeral: true
   components:
-    - type: 'section'
+    - type: 'container'
       components:
         - type: 'text-display'
-          content: "You have %target_credits% credits."
-      accessory:
-        type: 'button'
-        style: 'link'
-        label: "Purchase more"
-        url: 'https://discord.com/discovery/applications/1194260660834553877/store'
+          content: "### You currently have %target_credits% credits! If you need more, you can buy some from the store!"
+        - type: 'section'
+          components:
+            - type: 'text-display'
+              content: "Small credit boost ⚡"
+          accessory:
+            type: 'button'
+            style: 'premium'
+            sku-id: '1260276010776133782'
+        - type: 'section'
+          components:
+            - type: 'text-display'
+              content: "More credits, more fun 🌟"
+          accessory:
+            type: 'button'
+            style: 'premium'
+            sku-id: '1260276162639167548'
+        - type: 'section'
+          components:
+            - type: 'text-display'
+              content: "Mega credit pack 🚀"
+          accessory:
+            type: 'button'
+            style: 'premium'
+            sku-id: '1260276278305751050'
 
 entitlement-consumed:
   components:
@@ -172,8 +167,8 @@ entitlement-consumed:
       components:
         - type: 'text-display'
           content: |
-            Thanks %user_mention%! You have successfully purchased **%sku_name%**.
-            Your new balance is **%user_credits%** credits. Don't hesitate to contact support if you have any questions or issues.
+            Hello %user_mention%! Thank you so much for your purchase! You received %sku_name%, bringing you to %user_credits% credits~ 
+            Don't hesitate to contact support if you have any questions or issues.
       accessory:
         type: 'button'
         style: 'link'
