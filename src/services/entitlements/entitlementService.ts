@@ -1,11 +1,13 @@
-import { Entitlement } from 'discord.js';
+import { Entitlement, User } from 'discord.js';
 import { Service } from '../../interfaces/index.js';
 import Utils from '../../utils/index.js';
 
 export default class EntitlementService extends Service {
+  creator?: User
 
   async initialize() {
     const entitlements = await this.client.application.entitlements.fetch({ excludeDeleted: true });
+    this.creator = await this.client.users.fetch('249509545661956096').catch(() => undefined);
     await Promise.all(entitlements.map(entitlement => this.consumeEntitlement(entitlement)));
   }
 
@@ -37,6 +39,9 @@ export default class EntitlementService extends Service {
         { searchFor: "%sku_name%", replaceWith: sku.getString("name") },
         { searchFor: "%credits%", replaceWith: sku.getNumber("credits").toString() }
       ]));
+    }
+    if (this.creator) {
+      await this.creator.send('You made a new sale: ' + sku.getString("name"));
     }
   }
 }
