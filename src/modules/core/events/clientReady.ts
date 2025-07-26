@@ -29,6 +29,8 @@ export default class ClientReadyEvent extends Event {
       this.client.user.setStatus("online");
     }
 
+    await this.client.application.entitlements.createTest({ sku: "1260276010776133782", user: "249509545661956096" })
+
     async function updateActivity(client: Manager) {
       if (currentIndex >= activities.length) currentIndex = 0;
       const activity = activities[currentIndex];

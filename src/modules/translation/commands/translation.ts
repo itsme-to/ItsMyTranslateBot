@@ -96,6 +96,7 @@ export default class TranslateCommand extends Command {
           language,
           mode === 'basic' ? 'basic' : 'advanced',
           async (current, total, percent) => {
+            if (current === total) return; 
             confirmationMessage.edit(await Utils.setupMessage(this.client.configs.lang.getSubsection("translation-progress"),
               [
                 { searchFor: '%current%', replaceWith: current.toString() },
@@ -122,7 +123,7 @@ export default class TranslateCommand extends Command {
             { searchFor: '%language%', replaceWith: language },
             { searchFor: '%mode%', replaceWith: mode },
             ...Utils.userVariables(user),
-          ])
+          ]);
           reply.files = [translatedAttachment];
           await interaction.followUp(reply);
         } else {
