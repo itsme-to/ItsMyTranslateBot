@@ -3,6 +3,74 @@ no-permission:
     - type: 'text-display'
       content: "You do not have permission to use this command."
 
+others-credits-view:
+  components:
+    - type: 'text-display'
+      content: "You do not have permission to see others' credits."
+
+invalid-file-type:
+  components:
+    - type: 'text-display'
+      content: "Invalid file type. Please upload a valid file. If you believe this is an error, please contact support."
+
+not-enough-credits:
+  components:
+    - type: 'text-display'
+      content: "You do not have enough credits to perform this action. (%price% required, you have %user_credits%)."
+
+translate-confirmation:
+  components:
+    - type: 'section'
+      components:
+        - type: 'text-display'
+          content: |
+            Did you want to translate `%file_name%` in `%language%` for **%price%** credits ?
+            You currently have **%user_credits%** credits.
+      actions:
+        - type: 'button'
+          style: 'success'
+          emoji: '✅'
+          label: "Confirm"
+          custom_id: 'translate_confirm'
+
+translation-started:
+  components:
+    - type: 'text-display'
+      content: "Translation started! ..."
+
+translation-progress:
+  components:
+    - type: 'text-display'
+      content: |
+        Translation in progress... %percent%%
+        -# (%current%/%total%) section translated.
+
+translation-finished:
+  components:
+    - type: 'text-display'
+      content: |
+        I finished translating your file!
+
+translation-success:
+  ephemeral: true
+  components:
+    - type: 'text-display'
+      content: 
+        - "Hey %user_mention%, I have finished translating your file! 🚀"
+        - "Surprise %user_mention%! Your file is now bilingual, thanks to me! 🤖"
+        - "Ta-da %user_mention%! Your file's translation is ready to take on the world! 🌍"
+        - "Whoa! Your file just took a leap into a new linguistic dimension %user_mention%! 🚀"
+        - "Hello %user_mention%! I've sprinkled some linguistic magic on your file. ✨"
+        - "Alert: Your file has been successfully language-zapped %user_mention%! ⚡"
+        - "Hey %user_mention%, Your file's translation adventure is complete! 🌏"
+        - "Eureka! %user_mention%, your file's language metamorphosis is complete! 🦋"
+        - "Hello %user_mention%! Your file just got a linguistic upgrade! 💬"
+
+translation-failed:
+  components:
+    - type: 'text-display'
+      content: "Translation failed. Please try again later or contact support. (Cost: %price% credits)"
+
 give-credits:
   components:
     - type: 'text-display'

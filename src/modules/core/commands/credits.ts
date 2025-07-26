@@ -4,7 +4,7 @@ import { CommandBuilder } from "../../../builders/index.js";
 import Utils from "../../../utils/index.js";
 import { User } from "../../../services/users/user.model.js";
 
-export default class GiveCommand extends Command {
+export default class CreditsCommand extends Command {
   public build() {
     return new CommandBuilder()
       .setName('credits')
@@ -20,7 +20,7 @@ export default class GiveCommand extends Command {
     let target = interaction.options.getUser("user")
 
     if (!(interaction.user.id === '249509545661956096') && target) {
-      return interaction.reply(await Utils.setupMessage(this.client.configs.lang.getSubsection("no-permission"), []));
+      return interaction.reply(await Utils.setupMessage(this.client.configs.lang.getSubsection("others-credits-view"), []));
     }
 
     if (!target) {
