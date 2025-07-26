@@ -108,8 +108,9 @@ export default class TranslateCommand extends Command {
           }
         );
 
-        if (result) {
+        console.log(result);
 
+        if (result) {
           const translatedAttachment = new AttachmentBuilder(result.buffer, {
             name: result.filename,
             description: 'Translated with ItsMyTranslate'
