@@ -52,7 +52,7 @@ export default class TranslateCommand extends Command {
 
     const tokens = tokensResult.data.tokens;
     const filesAmount = tokensResult.data.files_amount;
-    const costPerToken = mode === 'basic' ? 0.0001 : 0.0002;
+    const costPerToken = mode === 'basic' ? parseFloat(process.env.BASIC_CREDIT_PRICE!) : parseFloat(process.env.ADVANCED_CREDIT_PRICE!);
     const credits =  parseInt(Math.max(filesAmount, (tokens * costPerToken)).toFixed(0));
 
     if (user.credits < credits) {
