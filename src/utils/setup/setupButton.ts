@@ -13,6 +13,7 @@ export async function setupButton(config: Config, variables: Variable[] = []) {
   let label = config.getStringOrNull("label", true);
   let emoji = config.getStringOrNull("emoji", true);
   let url = config.getStringOrNull("url", true);
+  let skuId = config.getStringOrNull("sku-id", true);
 
   style = await Utils.applyVariables(style, variables);
   customId = await Utils.applyVariables(customId, variables);
@@ -36,8 +37,13 @@ export async function setupButton(config: Config, variables: Variable[] = []) {
     button.setStyle(ButtonStyle.Link);
     button.setURL(url);
   } else {
-    button.setStyle(Utils.getButtonStyle(style) || ButtonStyle.Primary);
-    button.setCustomId(customId);
+    if (skuId) {
+      button.setStyle(ButtonStyle.Premium);
+      button.setSKUId(skuId);
+    } else {
+      button.setStyle(Utils.getButtonStyle(style) || ButtonStyle.Primary);
+      button.setCustomId(customId);
+    }
   }
 
   if (label) button.setLabel(label);
