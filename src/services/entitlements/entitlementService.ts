@@ -12,7 +12,7 @@ export default class EntitlementService extends Service {
     this.client.logger.debug(`Consuming entitlement ${entitlement.id} for user ${entitlement.userId}`);
     console.log(entitlement)
 
-    let user = await this.client.service.user.find(entitlement.userId);
+    let user = await this.client.service.user.findOrNull(entitlement.userId);
     if (!user) {
       const discordUser = await this.client.users.fetch(entitlement.userId).catch(() => null);
       if (!discordUser) {
