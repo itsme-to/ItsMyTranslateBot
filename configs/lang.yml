@@ -95,5 +95,5 @@ entitlement-consumed:
   components:
     - type: 'text-display'
       content: |
-        Thanks %user_mention%! You have successfully purchased **%sku_name%** for **%credits%** credits.
+        Thanks %user_mention%! You have successfully purchased **%sku_name%**.
         Your new balance is **%user_credits%** credits. Don't hesitate to contact support if you have any questions or issues.
