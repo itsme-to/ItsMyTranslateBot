@@ -9,7 +9,7 @@ export default class GiveCommand extends Command {
     return new CommandBuilder()
       .setName('give')
       .setGuilds(['935421560355946596'])
-      .setDescription('A command to give credit')
+      .setDescription('Give credits to a user')
       .setIntegrationTypes([ApplicationIntegrationType.GuildInstall])
       .setContexts([InteractionContextType.Guild])
       .addUserOption(option =>
