@@ -10,8 +10,15 @@ others-credits-view:
 
 invalid-file-type:
   components:
-    - type: 'text-display'
-      content: "Invalid file type. Please upload a valid file. If you believe this is an error, please contact support."
+    - type: 'section'
+      components:
+        - type: 'text-display'
+          content: "Invalid file type. Please upload a valid file. If you believe this is an error, please contact support."
+      accessory:
+        type: 'button'
+        style: 'link'
+        label: "Join Support Server"
+        url: 'https://itsme.to/discord'
 
 not-enough-credits:
   components:
@@ -70,8 +77,15 @@ translation-success:
 
 translation-failed:
   components:
-    - type: 'text-display'
-      content: "Translation failed. Please try again later or contact support. (Cost: %price% credits)"
+    - type: 'section'
+      components:
+        - type: 'text-display'
+          content: "Translation failed. Please try again later or contact support. (Cost: %price% credits)"
+      accessory:
+        type: 'button'
+        style: 'link'
+        label: "Join Support Server"
+        url: 'https://itsme.to/discord'
 
 give-credits:
   components:
@@ -93,7 +107,14 @@ credits:
 
 entitlement-consumed:
   components:
-    - type: 'text-display'
-      content: |
-        Thanks %user_mention%! You have successfully purchased **%sku_name%**.
-        Your new balance is **%user_credits%** credits. Don't hesitate to contact support if you have any questions or issues.
+    - type: 'section'
+      components:
+        - type: 'text-display'
+          content: |
+            Thanks %user_mention%! You have successfully purchased **%sku_name%**.
+            Your new balance is **%user_credits%** credits. Don't hesitate to contact support if you have any questions or issues.
+      accessory:
+        type: 'button'
+        style: 'link'
+        label: "Join Support Server"
+        url: 'https://itsme.to/discord'
