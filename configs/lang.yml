@@ -26,17 +26,34 @@ not-enough-credits:
       content: |
         Oopsie! You do not have enough credits to do this action! You need %price% credits to make it work.
         Right now, you have %user_credits% credits
-    - type: 'action-row'
+    - type: 'container'
       components:
-        - type: 'button'
-          style: 'premium'
-          sku-id: '1260276010776133782'
-        - type: 'button'
-          style: 'premium'
-          sku-id: '1260276162639167548'
-        - type: 'button'
-          style: 'premium'
-          sku-id: '1260276278305751050'
+        - type: 'text-display'
+          content: "Beep-boop~ You can now buy shiny products directly on Discord!"
+        - type: 'section'
+          components:
+            - type: 'text-display'
+              content: "Small but mighty ⚡"
+          accessory:
+            type: 'button'
+            style: 'premium'
+            sku-id: '1260276010776133782'
+        - type: 'section'
+          components:
+            - type: 'text-display'
+              content: "Bigger, stronger 🌟"
+          accessory:
+            type: 'button'
+            style: 'premium'
+            sku-id: '1260276162639167548'
+        - type: 'section'
+          components:
+            - type: 'text-display'
+              content: "Ultimate power 🚀"
+          accessory:
+            type: 'button'
+            style: 'premium'
+            sku-id: '1260276278305751050'
 
 translate-confirmation:
   components:
@@ -52,17 +69,34 @@ translate-confirmation:
         emoji: '✅'
         label: "Confirm"
         custom-id: 'translate_confirm'
-    - type: 'action-row'
+    - type: 'container'
       components:
-        - type: 'button'
-          style: 'premium'
-          sku-id: '1260276010776133782'
-        - type: 'button'
-          style: 'premium'
-          sku-id: '1260276162639167548'
-        - type: 'button'
-          style: 'premium'
-          sku-id: '1260276278305751050'
+        - type: 'text-display'
+          content: "Beep-boop~ You can now buy shiny products directly on Discord!"
+        - type: 'section'
+          components:
+            - type: 'text-display'
+              content: "Small but mighty ⚡"
+          accessory:
+            type: 'button'
+            style: 'premium'
+            sku-id: '1260276010776133782'
+        - type: 'section'
+          components:
+            - type: 'text-display'
+              content: "Bigger, stronger 🌟"
+          accessory:
+            type: 'button'
+            style: 'premium'
+            sku-id: '1260276162639167548'
+        - type: 'section'
+          components:
+            - type: 'text-display'
+              content: "Ultimate power 🚀"
+          accessory:
+            type: 'button'
+            style: 'premium'
+            sku-id: '1260276278305751050'
 
 translation-started:
   components:
