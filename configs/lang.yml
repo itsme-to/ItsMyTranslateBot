@@ -27,11 +27,11 @@ translate-confirmation:
             Did you want to translate `%file_name%` in `%language%` for **%price%** credits ?
             You currently have **%user_credits%** credits.
       accessory:
-        - type: 'button'
-          style: 'success'
-          emoji: '✅'
-          label: "Confirm"
-          custom_id: 'translate_confirm'
+        type: 'button'
+        style: 'success'
+        emoji: '✅'
+        label: "Confirm"
+        custom_id: 'translate_confirm'
 
 translation-started:
   components:
