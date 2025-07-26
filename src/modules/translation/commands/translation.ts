@@ -48,6 +48,8 @@ export default class TranslateCommand extends Command {
       buffer: buffer.toString('base64'),
     });
 
+    console.log(tokensResult);
+
     const tokens = tokensResult.tokens;
     const filesAmount = tokensResult.files_amount;
     const costPerToken = mode === 'basic' ? 0.0001 : 0.0002;
