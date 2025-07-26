@@ -1,8 +1,7 @@
 import WebSocket from 'ws';
 import { EventEmitter } from 'events';
 import crypto from 'crypto';
-import 
-  import { Logger } from '../../components/logger.js';
+import { Logger } from '../../components/logger.js';
 
 export class TranslationWSClient extends EventEmitter {
   private ws: WebSocket | null = null;
