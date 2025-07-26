@@ -6,11 +6,13 @@ import { Sequelize } from 'sequelize-typescript';
 import { sync } from 'glob';
 import { join } from 'path';
 import UserService from './services/users/userService.js';
+import EntitlementService from './services/entitlements/entitlementService.js';
 
 interface Services {
   event: EventService
   command: CommandService
   user: UserService
+  entitlement: EntitlementService
 }
 
 export class Manager extends Client<true> {
@@ -43,7 +45,8 @@ export class Manager extends Client<true> {
     await this.loadDatabaseModels();
     this.logger.info('Database models loaded!');
 
-    this.login(process.env.DISCORD_TOKEN);
+    await this.login(process.env.DISCORD_TOKEN);
+    await this.service.entitlement.initialize();
   }
 
 

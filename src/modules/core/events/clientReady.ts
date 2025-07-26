@@ -28,9 +28,8 @@ export default class ClientReadyEvent extends Event {
       client.logger.warn(`The status "${status}" is not valid. Must be one of "invisible", "dnd", "idle" or "online".`);
       this.client.user.setStatus("online");
     }
-
-    console.log(await this.client.application.entitlements.fetch())
-    await this.client.application.entitlements.createTest({ sku: "1260276010776133782", user: "249509545661956096" })
+    
+    await this.client.application.entitlements.deleteTest('1260287124394217523');
 
     async function updateActivity(client: Manager) {
       if (currentIndex >= activities.length) currentIndex = 0;
