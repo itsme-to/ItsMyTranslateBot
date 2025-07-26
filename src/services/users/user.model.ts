@@ -32,7 +32,7 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
 
   @Column({
     type: DataTypes.INTEGER,
-    defaultValue: 0
+    defaultValue: 3
   })
   declare credits: CreationOptional<number>;
 

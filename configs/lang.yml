@@ -14,7 +14,7 @@ credits:
     - type: 'section'
       components:
         - type: 'text-display'
-          content: "You have %credits% credits."
+          content: "You have %target_credits% credits."
       accessory:
         type: 'button'
         style: 'link'
