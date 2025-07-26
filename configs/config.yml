@@ -1,0 +1,14 @@
+
+# Bot presence settings
+presence:
+  interval: 5 # Interval in seconds between each status change
+
+  # Activities the bot can display
+  activities:
+    - text: "Guild Members: %guild_members%"
+      type: "Custom" # Activity type. Options: 'Playing', 'Listening', 'Watching', 'Streaming', 'Custom'.
+    - text: "anwsering your questions"
+      type: "Playing"
+    - text: "Created by @itsme.to"
+      type: "Custom"
+  status: online
