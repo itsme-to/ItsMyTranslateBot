@@ -69,10 +69,13 @@ translate-confirmation:
         emoji: '✅'
         label: "Confirm"
         custom-id: 'translate_confirm'
+    - type: 'separator'
+      divider: false
+      spacing: 2
     - type: 'container'
       components:
         - type: 'text-display'
-          content: "Beep-boop~ You can now buy shiny products directly on Discord!"
+          content: "### Beep-boop~ You can now buy shiny products directly on Discord!"
         - type: 'section'
           components:
             - type: 'text-display'
