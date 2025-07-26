@@ -28,7 +28,7 @@ export default class EventService extends Service {
       }
       this.events.get(event.name)?.addEvent(event);
     } catch (e: any) {
-      this.client.logger.error(`Error initializing event '${Event.name}'`, e.stack);
+      this.client.logger.error(`Error initializing event '${Event.name}'`, e, e.stack);
     }
   }
 

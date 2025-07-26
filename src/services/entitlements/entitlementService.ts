@@ -23,7 +23,7 @@ export default class EntitlementService extends Service {
       user = await this.client.service.user.findOrCreate(discordUser);
     }
 
-    const sku = this.client.configs.config.getSubsections("sku").find(sku => sku.getString("id") === entitlement.skuId);
+    const sku = this.client.configs.config.getSubsections("skus").find(sku => sku.getString("id") === entitlement.skuId);
     if (!sku) {
       this.client.logger.error(`SKU with ID ${entitlement.skuId} not found for entitlement ${entitlement.id}`);
       return;
