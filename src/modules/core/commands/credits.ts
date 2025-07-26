@@ -1,4 +1,4 @@
-import { ApplicationIntegrationType, ChatInputCommandInteraction, InteractionContextType, } from "discord.js";
+import { ChatInputCommandInteraction, } from "discord.js";
 import Command from "../../../services/commands/command.js"
 import { CommandBuilder } from "../../../builders/index.js";
 import Utils from "../../../utils/index.js";
@@ -8,9 +8,7 @@ export default class GiveCommand extends Command {
   public build() {
     return new CommandBuilder()
       .setName('credits')
-      .setIntegrationTypes([ApplicationIntegrationType.GuildInstall, ApplicationIntegrationType.UserInstall])
       .setDescription('Check your or another user\'s credits')
-      .setContexts([InteractionContextType.Guild, InteractionContextType.BotDM, InteractionContextType.PrivateChannel])
       .addUserOption(option =>
         option.setName('user')
           .setDescription('The user to inspect credits for')
