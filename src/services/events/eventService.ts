@@ -40,8 +40,6 @@ export default class EventService extends Service {
         });
       } else {
         this.client.on(name, async (...args) => {
-          console.log('running event', name);
-
           await executor.run(...args);
         });
       }

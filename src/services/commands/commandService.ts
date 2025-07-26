@@ -88,7 +88,7 @@ export default class CommandService extends Service {
         await command.execute(interaction, user);
       }
     } catch (e: any) {
-      this.client.logger.error(`Error executing command: ${interaction.commandName}`, e.stack);
+      this.client.logger.error(`Error executing command: ${interaction.commandName}`, e);
     }
   }
 }
