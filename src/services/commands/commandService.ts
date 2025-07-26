@@ -55,6 +55,7 @@ export default class CommandService extends Service {
         return data;
       });
 
+    console.log(commmandGuilds);
 
     try {
       this.client.logger.info('Registering slash commands.');
