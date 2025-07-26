@@ -1,4 +1,4 @@
-import { ApplicationIntegrationType, ChatInputCommandInteraction, InteractionContextType, PermissionFlagsBits, } from "discord.js";
+import { ChatInputCommandInteraction, InteractionContextType, PermissionFlagsBits, } from "discord.js";
 import Command from "../../../services/commands/command.js"
 import { CommandBuilder } from "../../../builders/index.js";
 import Utils from "../../../utils/index.js";
@@ -10,7 +10,6 @@ export default class GiveCommand extends Command {
       .setName('give')
       .setGuilds(['935421560355946596'])
       .setDescription('Give credits to a user')
-      .setIntegrationTypes([ApplicationIntegrationType.GuildInstall])
       .setContexts([InteractionContextType.Guild])
       .addUserOption(option =>
         option.setName('user')
