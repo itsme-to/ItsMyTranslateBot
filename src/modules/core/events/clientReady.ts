@@ -28,8 +28,6 @@ export default class ClientReadyEvent extends Event {
       client.logger.warn(`The status "${status}" is not valid. Must be one of "invisible", "dnd", "idle" or "online".`);
       this.client.user.setStatus("online");
     }
-    
-    await this.client.application.entitlements.deleteTest('1260287124394217523');
 
     async function updateActivity(client: Manager) {
       if (currentIndex >= activities.length) currentIndex = 0;
