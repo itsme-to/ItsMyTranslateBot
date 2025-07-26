@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "rootDir": "./src",
+    "moduleResolution": "NodeNext",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "emitDecoratorMetadata": true,
+    "strict": true,
+    "skipLibCheck": true
+  }
+}
