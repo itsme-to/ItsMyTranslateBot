@@ -40,7 +40,7 @@ export default class TranslateCommand extends Command {
       return interaction.reply(await Utils.setupMessage(this.client.configs.lang.getSubsection("invalid-file-type"), []));
     }
 
-    await interaction.deferReply();
+    const confirmationMessage = await interaction.deferReply();
 
     const arrayBuffer = await fetch(attachment.url).then(res => res.arrayBuffer());
     const buffer = Buffer.from(arrayBuffer);
@@ -56,13 +56,13 @@ export default class TranslateCommand extends Command {
     const credits =  parseInt(Math.max(filesAmount, (tokens * costPerToken)).toFixed(0));
 
     if (user.credits < credits) {
-      return interaction.reply(await Utils.setupMessage(this.client.configs.lang.getSubsection("not-enough-credits"), [
+      return interaction.editReply(await Utils.setupMessage(this.client.configs.lang.getSubsection("not-enough-credits"), [
         ...Utils.userVariables(user),
         { searchFor: '%price%', replaceWith: credits },
       ]));
     }
 
-    const confirmationMessage = await interaction.editReply(await Utils.setupMessage(this.client.configs.lang.getSubsection("translate-confirmation"), [
+    await interaction.editReply(await Utils.setupMessage(this.client.configs.lang.getSubsection("translate-confirmation"), [
       { searchFor: '%file_name%', replaceWith: attachment.name },
       { searchFor: '%language%', replaceWith: language },
       { searchFor: '%mode%', replaceWith: mode },
