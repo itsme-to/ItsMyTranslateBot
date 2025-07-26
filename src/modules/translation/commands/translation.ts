@@ -40,6 +40,8 @@ export default class TranslateCommand extends Command {
       return interaction.reply(await Utils.setupMessage(this.client.configs.lang.getSubsection("invalid-file-type"), []));
     }
 
+    await interaction.deferReply();
+
     const arrayBuffer = await fetch(attachment.url).then(res => res.arrayBuffer());
     const buffer = Buffer.from(arrayBuffer);
 
@@ -60,7 +62,7 @@ export default class TranslateCommand extends Command {
       ]));
     }
 
-    const confirmationMessage = await interaction.reply(await Utils.setupMessage(this.client.configs.lang.getSubsection("translate-confirmation"), [
+    const confirmationMessage = await interaction.editReply(await Utils.setupMessage(this.client.configs.lang.getSubsection("translate-confirmation"), [
       { searchFor: '%file_name%', replaceWith: attachment.name },
       { searchFor: '%language%', replaceWith: language },
       { searchFor: '%mode%', replaceWith: mode },
