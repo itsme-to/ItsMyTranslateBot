@@ -100,7 +100,7 @@ export default class TranslateCommand extends Command {
               [
                 { searchFor: '%current%', replaceWith: current.toString() },
                 { searchFor: '%total%', replaceWith: total.toString() },
-                { searchFor: '%percent%', replaceWith: percent.toFixed(2) + '%' },
+                { searchFor: '%percent%', replaceWith: percent + '%' },
                 { searchFor: '%file_name%', replaceWith: attachment.name },
                 { searchFor: '%language%', replaceWith: language },
                 { searchFor: '%mode%', replaceWith: mode },

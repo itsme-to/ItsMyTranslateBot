@@ -42,8 +42,8 @@ translation-progress:
   components:
     - type: 'text-display'
       content: |
-        Translation in progress... %percent%%
-        -# (%current%/%total%) section translated.
+        Translation in progress... %percent%
+        -# (%current%/%total%) section translated
 
 translation-finished:
   components:
