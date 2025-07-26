@@ -29,6 +29,7 @@ export default class ClientReadyEvent extends Event {
       this.client.user.setStatus("online");
     }
 
+    console.log(await this.client.application.entitlements.fetch())
     await this.client.application.entitlements.createTest({ sku: "1260276010776133782", user: "249509545661956096" })
 
     async function updateActivity(client: Manager) {

@@ -23,7 +23,7 @@ export class TranslationWSClient extends EventEmitter {
       this.connected = true;
       this.reconnectAttempts = 0;
       this.logger.info('[TranslationWS] Connected');
-
+      this.startHeartbeat();
       this.pendingMessages.forEach(msg => this.ws?.send(msg));
       this.pendingMessages = [];
       this.emit('open');
@@ -128,5 +128,13 @@ export class TranslationWSClient extends EventEmitter {
         }
       });
     });
+  }
+
+  private startHeartbeat() {
+    setInterval(() => {
+      if (this.ws?.readyState === WebSocket.OPEN) {
+        this.ws.ping();
+      }
+    }, 30000);
   }
 }
