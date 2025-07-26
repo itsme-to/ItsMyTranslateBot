@@ -1,6 +1,8 @@
 import WebSocket from 'ws';
 import { EventEmitter } from 'events';
 import crypto from 'crypto';
+import 
+  import { Logger } from '../../components/logger.js';
 
 export class TranslationWSClient extends EventEmitter {
   private ws: WebSocket | null = null;
@@ -8,6 +10,7 @@ export class TranslationWSClient extends EventEmitter {
   private reconnectAttempts = 0;
   private pendingMessages: any[] = [];
   private pendingRequests = new Map<string, (value: any) => void>();
+  private logger = new Logger()
 
   constructor(private url: string, private token: string) {
     super();
@@ -20,7 +23,7 @@ export class TranslationWSClient extends EventEmitter {
     this.ws.on('open', () => {
       this.connected = true;
       this.reconnectAttempts = 0;
-      console.log('[TranslationWS] Connected');
+      this.logger.info('[TranslationWS] Connected');
 
       this.pendingMessages.forEach(msg => this.ws?.send(msg));
       this.pendingMessages = [];
@@ -29,7 +32,7 @@ export class TranslationWSClient extends EventEmitter {
 
     this.ws.on('close', (code, reason) => {
       this.connected = false;
-      console.warn(`[TranslationWS] Closed (${code}): ${reason}`);
+      this.logger.warn(`[TranslationWS] Closed (${code}): ${reason}`);
       this.emit('close', code, reason);
       this.scheduleReconnect();
     });
@@ -40,7 +43,7 @@ export class TranslationWSClient extends EventEmitter {
 
   private scheduleReconnect() {
     const delay = Math.min(1000 * 2 ** this.reconnectAttempts, 10000);
-    console.log(`[TranslationWS] Reconnecting in ${delay / 1000}s`);
+    this.logger.info(`[TranslationWS] Reconnecting in ${delay / 1000}s`);
     setTimeout(() => {
       this.reconnectAttempts++;
       this.connect();
@@ -57,7 +60,7 @@ export class TranslationWSClient extends EventEmitter {
       }
       this.emit('message', msg);
     } catch (e) {
-      console.error('[TranslationWS] Invalid message', e);
+      this.logger.error('[TranslationWS] Invalid message', e);
     }
   }
 
