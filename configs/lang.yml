@@ -31,7 +31,7 @@ translate-confirmation:
         style: 'success'
         emoji: '✅'
         label: "Confirm"
-        custom_id: 'translate_confirm'
+        custom-id: 'translate_confirm'
 
 translation-started:
   components:
