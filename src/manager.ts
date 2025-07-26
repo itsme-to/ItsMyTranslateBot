@@ -26,6 +26,7 @@ export class Manager extends Client<true> {
     this.logger.info('Initializing...');
 
     await this.configs.config.initialize();
+    await this.configs.lang.initialize();
 
     await this.initializeDatabase();
     this.logger.info('Database initialized!');
