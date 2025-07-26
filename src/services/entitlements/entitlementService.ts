@@ -4,12 +4,13 @@ import { Service } from '../../interfaces/index.js';
 export default class EntitlementService extends Service {
 
   async initialize() {
-    const entitlements = await this.client.application.entitlements.fetch();
+    const entitlements = await this.client.application.entitlements.fetch({ excludeDeleted: true });
     await Promise.all(entitlements.map(entitlement => this.consumeEntitlement(entitlement)));
   }
 
   async consumeEntitlement(entitlement: Entitlement) {
     this.client.logger.debug(`Consuming entitlement ${entitlement.id} for user ${entitlement.userId}`);
+    console.log(entitlement)
 
     let user = await this.client.service.user.find(entitlement.userId);
     if (!user) {
