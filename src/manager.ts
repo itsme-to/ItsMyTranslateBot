@@ -46,6 +46,7 @@ export class Manager extends Client<true> {
     this.logger.info('Database models loaded!');
 
     await this.login(process.env.DISCORD_TOKEN);
+    this.service.entitlement = new EntitlementService(this);
     await this.service.entitlement.initialize();
   }
 
