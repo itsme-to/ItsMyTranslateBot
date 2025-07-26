@@ -42,19 +42,19 @@ export default class CommandService extends Service {
       .map(command => {
         const data: any = command.builder.toJSON();
 
-        if (data.guilds) {
+        if (data.guilds.length > 0) {
           data.guilds.forEach((guildId: string) => {
             if (!commmandGuilds.has(guildId)) {
               commmandGuilds.set(guildId, []);
             }
             commmandGuilds.get(guildId).push(data);
           });
-          return null;
+          return
         }
 
         return data;
-      });
-    console.log(commandData);
+      })
+      .filter(Boolean)
 
     try {
       this.client.logger.info('Registering slash commands.');
