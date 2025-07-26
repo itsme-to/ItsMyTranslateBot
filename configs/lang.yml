@@ -26,7 +26,7 @@ translate-confirmation:
           content: |
             Did you want to translate `%file_name%` in `%language%` for **%price%** credits ?
             You currently have **%user_credits%** credits.
-      actions:
+      accessory:
         - type: 'button'
           style: 'success'
           emoji: '✅'
