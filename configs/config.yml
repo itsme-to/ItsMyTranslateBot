@@ -12,3 +12,14 @@ presence:
     - text: "Created by @itsme.to"
       type: "Custom"
   status: online
+
+skus:
+  - id: '1260276010776133782'
+    name: '100 Credits'
+    credits: 100
+  - id: '1260276162639167548'
+    name: '250 Credits +250 Free'
+    credits: 500
+  - id: '1260276278305751050'
+    name: '500 Credits +700 Free'
+    credits: 1200

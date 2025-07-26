@@ -90,3 +90,10 @@ credits:
         style: 'link'
         label: "Purchase more"
         url: 'https://discord.com/discovery/applications/1194260660834553877/store'
+
+entitlement-consumed:
+  components:
+    - type: 'text-display'
+      content: |
+        Thanks %user_mention%! You have successfully purchased **%sku_name%** for **%credits%** credits.
+        Your new balance is **%user_credits%** credits. Don't hesitate to contact support if you have any questions or issues.

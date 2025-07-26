@@ -1,5 +1,6 @@
 import { Entitlement } from 'discord.js';
 import { Service } from '../../interfaces/index.js';
+import Utils from '../../utils/index.js';
 
 export default class EntitlementService extends Service {
 
@@ -12,8 +13,8 @@ export default class EntitlementService extends Service {
     if (entitlement.consumed === true) return;
     this.client.logger.debug(`Consuming entitlement ${entitlement.id} for user ${entitlement.userId}`);
     let user = await this.client.service.user.findOrNull(entitlement.userId);
+    const discordUser = await this.client.users.fetch(entitlement.userId).catch(() => null);
     if (!user) {
-      const discordUser = await this.client.users.fetch(entitlement.userId).catch(() => null);
       if (!discordUser) {
         this.client.logger.error(`User with ID ${entitlement.userId} not found for entitlement ${entitlement.id}`);
         return;
@@ -22,19 +23,20 @@ export default class EntitlementService extends Service {
       user = await this.client.service.user.findOrCreate(discordUser);
     }
 
-    const skus: { [key: string]: number } = {
-      "1260276010776133782": 100,
-      "1260276162639167548": 500,
-      "1260276278305751050": 1200
-    }
-
-    const sku = skus[entitlement.skuId];
+    const sku = this.client.configs.config.getSubsections("sku").find(sku => sku.getString("id") === entitlement.skuId);
     if (!sku) {
       this.client.logger.error(`SKU with ID ${entitlement.skuId} not found for entitlement ${entitlement.id}`);
       return;
     }
 
-    await user.addCredits(sku);
+    await user.addCredits(sku.getNumber("credits"));
     await entitlement.consume()
+    if (discordUser) {
+      await discordUser.send(await Utils.setupMessage(this.client.configs.lang.getSubsection("entitlement-consumed"), [
+        ...Utils.userVariables(user),
+        { searchFor: "%sku_name%", replaceWith: sku.getString("name") },
+        { searchFor: "%credits%", replaceWith: sku.getNumber("credits").toString() }
+      ]));
+    }
   }
 }
