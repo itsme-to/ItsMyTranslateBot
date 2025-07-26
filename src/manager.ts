@@ -47,19 +47,9 @@ export class Manager extends Client<true> {
   private async initializeDatabase() {
     this.logger.info('Initializing database...');
 
-    const username = process.env.MYSQL_DATABASE_USER || '';
-    const password = process.env.MYSQL_DATABASE_PASSWORD || '';
-    const databaseName = process.env.MYSQL_DATABASE_NAME || '';
-    const host = process.env.MYSQL_DATABASE_HOST || '';
-    const port = process.env.MYSQL_DATABASE_PORT || '';
-
     this.database = new Sequelize(
-      databaseName,
-      username,
-      password,
+      process.env.MYSQL_URL || '',
       {
-        host: host,
-        port: port ? parseInt(port) : undefined,
         dialect: 'mysql',
         logging: false
       });
