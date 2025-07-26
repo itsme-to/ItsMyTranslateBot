@@ -8,9 +8,9 @@ export default class InteractionCreateEvent extends Event {
   public async execute(interaction: Interaction<'cached'>) {
     if (!interaction.isCommand()) return
 
-
+    const user = await this.client.service.user.findOrCreate(interaction.user)
     if (interaction.isContextMenuCommand() || interaction.isChatInputCommand()) {
-      this.client.service.command.dispatchCommand(interaction)
+      this.client.service.command.dispatchCommand(interaction, user);
     }
   }
 }

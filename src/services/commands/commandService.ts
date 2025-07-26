@@ -3,13 +3,12 @@ import { join, resolve } from 'path';
 import { sync } from "glob";
 import Command from './command.js';
 import {
-  REST,
-  Routes,
   Collection,
   ChatInputCommandInteraction,
   ContextMenuCommandInteraction,
   AutocompleteInteraction
 } from 'discord.js';
+import { User } from '../users/user.model.js';
 
 export default class CommandService extends Service {
   public commands = new Collection<string, Command>();
@@ -38,17 +37,34 @@ export default class CommandService extends Service {
   }
 
   public async deployCommands() {
+    const commmandGuilds = new Collection<string, any>();
     const commandData = [...this.commands.values()]
-      .map(command => command.builder.toJSON());
+      .map(command => {
+        const data: any = command.builder.toJSON();
 
-    const token = process.env.DISCORD_TOKEN!;
-    const rest = new REST().setToken(token);
+        if (data.guilds) {
+          data.guilds.forEach((guildId: string) => {
+            if (!commmandGuilds.has(guildId)) {
+              commmandGuilds.set(guildId, []);
+            }
+            commmandGuilds.get(guildId).push(data);
+          });
+          return null;
+        }
+
+        return data;
+      });
+
 
     try {
       this.client.logger.info('Registering slash commands.');
-      await rest.put(Routes.applicationCommands(this.client.user.id), {
-        body: commandData,
-      });
+
+      for (const [guildId, commands] of commmandGuilds) {
+        await this.client.application.commands.set(commands, guildId);
+        this.client.logger.info(`Successfully registered slash commands for guild: ${guildId}`);
+      }
+
+      await this.client.application.commands.set(commandData);
 
       this.client.logger.info('Successfully registered slash commands.');
     } catch (e: any) {
@@ -57,7 +73,7 @@ export default class CommandService extends Service {
   }
 
   //dispatch command
-  public async dispatchCommand(interaction: ChatInputCommandInteraction<'cached'> | ContextMenuCommandInteraction<'cached'> | AutocompleteInteraction<'cached'>) {
+  public async dispatchCommand(interaction: ChatInputCommandInteraction<'cached'> | ContextMenuCommandInteraction<'cached'> | AutocompleteInteraction<'cached'>, user: User) {
     const command = this.commands.get(interaction.commandName);
 
     if (!command) {
@@ -69,7 +85,7 @@ export default class CommandService extends Service {
       if (interaction.isAutocomplete()) {
         await command.autocomplete(interaction);
       } else {
-        await command.execute(interaction);
+        await command.execute(interaction, user);
       }
     } catch (e: any) {
       this.client.logger.error(`Error executing command: ${interaction.commandName}`, e.stack);
