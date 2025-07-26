@@ -18,7 +18,8 @@ export class Manager extends Client<true> {
   public database!: Sequelize;
   public logger: Logger = new Logger();
   public configs = {
-    config: new BaseConfig("configs/config", "configs/config.yml")
+    config: new BaseConfig("configs/config", "configs/config.yml"),
+    lang: new BaseConfig("configs/lang", "configs/lang.yml"),
   };
 
   async initialize() {

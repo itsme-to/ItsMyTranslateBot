@@ -34,32 +34,32 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
     type: DataTypes.INTEGER,
     defaultValue: 0
   })
-  declare tokens: CreationOptional<number>;
+  declare credits: CreationOptional<number>;
 
   get mention(): NonAttribute<string> {
     return userMention(this.id);
   }
 
-  async addTokens(amount: number) {
-    this.tokens += amount;
+  async addCredits(amount: number) {
+    this.credits += amount;
     await this.save();
   }
 
-  async removeTokens(amount: number) {
-    if (this.tokens >= amount) {
-      this.tokens -= amount;
+  async removeCredits(amount: number) {
+    if (this.credits >= amount) {
+      this.credits -= amount;
       await this.save();
     } else {
-      throw new Error("Insufficient tokens");
+      throw new Error("Insufficient credits");
     }
   }
 
-  async setTokens(amount: number) {
-    this.tokens = amount;
+  async setCredits(amount: number) {
+    this.credits = amount;
     await this.save();
   }
 
-  hasTokens(amount: number) {
-    return this.tokens >= amount;
+  hasCredits(amount: number) {
+    return this.credits >= amount;
   }
 }

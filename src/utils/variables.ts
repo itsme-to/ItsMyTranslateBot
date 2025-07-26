@@ -45,6 +45,9 @@ export const userVariables = (user: User, prefix = "user") => {
   }, {
     searchFor: `%${prefix}_create_date%`,
     replaceWith: time(user.createdAt, "D"),
+  }, {
+    searchFor: `%${prefix}_credits%`,
+    replaceWith: user.credits.toString(),
   }]
 }
 

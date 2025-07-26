@@ -1,0 +1,22 @@
+no-permission:
+  components:
+    - type: 'text-display'
+      content: "You do not have permission to use this command."
+
+give-credits:
+  components:
+    - type: 'text-display'
+      content: "I just gave %target_mention% %amount% credits, he now has %target_credits% credits! 🎁"
+
+credits:
+  ephemeral: true
+  components:
+    - type: 'section'
+      components:
+        - type: 'text-display'
+          content: "You have %credits% credits."
+      accessory:
+        type: 'button'
+        style: 'link'
+        label: "Purchase more"
+        url: 'https://discord.com/discovery/applications/1194260660834553877/store'
