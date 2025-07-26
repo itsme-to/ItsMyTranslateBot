@@ -1,4 +1,4 @@
-import { AttachmentBuilder, ChatInputCommandInteraction, ComponentType, InteractionContextType, } from "discord.js";
+import { AttachmentBuilder, ChatInputCommandInteraction, ComponentType, FileBuilder, InteractionContextType, } from "discord.js";
 import Command from "../../../services/commands/command.js"
 import { CommandBuilder } from "../../../builders/index.js";
 import Utils from "../../../utils/index.js";
@@ -107,8 +107,6 @@ export default class TranslateCommand extends Command {
               ]));
           }
         );
-
-        console.log(result);
 
         if (result) {
           const translatedAttachment = new AttachmentBuilder(result.buffer, {

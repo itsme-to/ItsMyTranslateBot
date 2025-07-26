@@ -65,6 +65,8 @@ translation-success:
         - "Hey %user_mention%, Your file's translation adventure is complete! 🌏"
         - "Eureka! %user_mention%, your file's language metamorphosis is complete! 🦋"
         - "Hello %user_mention%! Your file just got a linguistic upgrade! 💬"
+    - type: file
+      url: 'attachment://%file_name%'
 
 translation-failed:
   components:
