@@ -34,7 +34,7 @@ export default class TranslateCommand extends Command {
     const language = interaction.options.getString("language", true);
     const mode = interaction.options.getString("mode") || 'basic';
 
-    const acceptedFileTypes = ["application/json", "text/plain", "application/javascript", "text/markdown", "text/html", "text/csv", "application/rtp", "application/zip"];
+    const acceptedFileTypes = ["application/json", "text/plain", "application/javascript", "text/markdown", "text/html", "application/rtp", "application/zip", "application/x-yaml"];
     const contentTypeMainPart = attachment.contentType?.split(';')[0].trim() || "";
     if (!acceptedFileTypes.includes(contentTypeMainPart)) {
       return interaction.reply(await Utils.setupMessage(this.client.configs.lang.getSubsection("invalid-file-type"), []));
