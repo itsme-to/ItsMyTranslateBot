@@ -50,7 +50,12 @@ export default class TranslateCommand extends Command {
       buffer: buffer.toString('base64'),
     });
 
-    console.log(tokensResult)
+    if (tokensResult.event === 'error') {
+      return interaction.editReply(await Utils.setupMessage(this.client.configs.lang.getSubsection("translation-error"), [
+        ...Utils.userVariables(user),
+        { searchFor: '%error%', replaceWith: tokensResult.data.message },
+      ]));
+    }
 
     const tokens = tokensResult.data.tokens;
     const filesAmount = tokensResult.data.files_amount;
