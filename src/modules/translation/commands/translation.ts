@@ -53,7 +53,7 @@ export default class TranslateCommand extends Command {
     if (tokensResult.event === 'error') {
       return interaction.editReply(await Utils.setupMessage(this.client.configs.lang.getSubsection("file-error"), [
         ...Utils.userVariables(user),
-        { searchFor: '%error%', replaceWith: tokensResult.data.message },
+        { searchFor: '%errors%', replaceWith: tokensResult.data.message.split('\n').map((line: any) => `-# ${line}`).join('\n') },
       ]));
     }
 

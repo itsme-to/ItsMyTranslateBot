@@ -33,7 +33,12 @@ file-error:
         style: 'link'
         label: "Join Support Server"
         url: 'https://itsme.to/discord'
-
+    - type: 'container'
+      components:
+        - type: 'text-display'
+          content: "**Error(s) details:**"
+        - type: 'text-display'
+          content: "%errors%"
 not-enough-credits:
   components:
     - type: 'text-display'
