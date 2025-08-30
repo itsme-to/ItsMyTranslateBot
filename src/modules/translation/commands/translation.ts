@@ -115,18 +115,7 @@ export default class TranslateCommand extends Command {
                 { searchFor: '%price%', replaceWith: credits.toString() },
                 ...Utils.userVariables(user),
               ]));
-          }, async (message) => {
-            buttonInteraction.followUp(await Utils.setupMessage(this.client.configs.lang.getSubsection("translation-issue"),
-              [
-                { searchFor: '%file_name%', replaceWith: attachment.name },
-                { searchFor: '%language%', replaceWith: language },
-                { searchFor: '%mode%', replaceWith: mode },
-                { searchFor: '%price%', replaceWith: credits.toString() },
-                { searchFor: '%issue%', replaceWith: message },
-                ...Utils.userVariables(user),
-              ]));
-          }
-        );
+          });
 
         if (result) {
           const translatedAttachment = new AttachmentBuilder(result.buffer, {

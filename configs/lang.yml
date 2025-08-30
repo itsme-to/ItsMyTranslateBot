@@ -139,24 +139,6 @@ translation-failed:
         label: "Join Support Server"
         url: 'https://itsme.to/discord'
 
-translation-issue:
-  components:
-    - type: 'section'
-      components:
-        - type: 'text-display'
-          content: |
-            Oops, an issue occurred during the translation of a file.
-            -# File: %file_name%, Cost: %price% credits, Mode: %mode%
-      accessory:
-        type: 'button'
-        style: 'link'
-        label: "Join Support Server"
-        url: 'https://itsme.to/discord'
-    - type: 'container'
-      components:
-        - type: 'text-display'
-          content: "%issue%"
-
 give-credits:
   components:
     - type: 'text-display'
