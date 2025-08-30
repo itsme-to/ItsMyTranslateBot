@@ -134,19 +134,25 @@ export default class TranslateCommand extends Command {
             description: 'Translated with ItsMyTranslate'
           });
 
-          await confirmationMessage.edit(await Utils.setupMessage(this.client.configs.lang.getSubsection("translation-finished"), []));
-          const reply = await Utils.setupMessage(this.client.configs.lang.getSubsection("translation-success"), [
-            { searchFor: '%file_name%', replaceWith: result.filename },
+          const variables = [
+            { searchFor: '%file_name%', replaceWith: attachment.name },
             { searchFor: '%language%', replaceWith: language },
             { searchFor: '%mode%', replaceWith: mode },
+            { searchFor: '%price%', replaceWith: credits.toString() },
             ...Utils.userVariables(user),
-          ]);
+          ];
+
+          await confirmationMessage.edit(await Utils.setupMessage(this.client.configs.lang.getSubsection("translation-finished"), variables));
+          const reply = await Utils.setupMessage(this.client.configs.lang.getSubsection("translation-success"), variables);
           reply.files = [translatedAttachment];
           await interaction.followUp(reply);
         } else {
           await interaction.followUp(await Utils.setupMessage(this.client.configs.lang.getSubsection("translation-failed"), [
             ...Utils.userVariables(user),
+            { searchFor: '%file_name%', replaceWith: attachment.name },
+            { searchFor: '%language%', replaceWith: language },
             { searchFor: '%price%', replaceWith: credits.toString() },
+            { searchFor: '%mode%', replaceWith: mode },
           ]));
         }
       }

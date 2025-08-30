@@ -106,6 +106,7 @@ translation-finished:
     - type: 'text-display'
       content: |
         I’ve finished translating your awesome file! 
+        -# File: %file_name%, Cost: %price% credits, Mode: %mode%
 
 translation-success:
   ephemeral: true
