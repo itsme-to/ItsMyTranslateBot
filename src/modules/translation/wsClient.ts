@@ -85,7 +85,8 @@ export class TranslationWSClient extends EventEmitter {
     buffer: Buffer,
     lang: string,
     mode: 'basic' | 'advanced',
-    onProgress?: (current: number, total: number, percent: number) => void
+    onProgress?: (current: number, total: number, percent: number) => void,
+    onIssue?: (message: string) => void
   ): Promise<{ buffer: Buffer; filename: string; mime: string }> {
     const taskId = crypto.randomUUID();
 
@@ -98,6 +99,12 @@ export class TranslationWSClient extends EventEmitter {
             if (onProgress) {
               const { current, total, percent } = msg.data;
               onProgress(current, total, percent);
+            }
+            break;
+
+          case 'issue':
+            if (onIssue) {
+              onIssue(msg.data.message);
             }
             break;
 
