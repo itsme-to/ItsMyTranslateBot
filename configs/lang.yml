@@ -27,7 +27,6 @@ file-error:
         - type: 'text-display'
           content: |
             Oops, an error occurred while trying to read the file you sent me! Is it a valid file?
-            -# Error: %error%
       accessory:
         type: 'button'
         style: 'link'
