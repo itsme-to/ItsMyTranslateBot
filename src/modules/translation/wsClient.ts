@@ -37,7 +37,10 @@ export class TranslationWSClient extends EventEmitter {
     });
 
     this.ws.on('message', (raw) => this.handleMessage(raw));
-    this.ws.on('error', (err) => this.emit('error', err));
+    this.ws.on('error', (err) => {
+      this.logger.error('[TranslationWS] Error', err);
+      this.emit('error', err);
+    });
   }
 
   private scheduleReconnect() {
