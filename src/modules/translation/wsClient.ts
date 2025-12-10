@@ -87,7 +87,6 @@ export class TranslationWSClient extends EventEmitter {
     filename: string,
     buffer: Buffer,
     lang: string,
-    mode: 'basic' | 'advanced',
     onProgress?: (current: number, total: number, percent: number) => void
   ): Promise<{ buffer: Buffer; filename: string; mime: string }> {
     const taskId = crypto.randomUUID();
@@ -126,8 +125,7 @@ export class TranslationWSClient extends EventEmitter {
           taskId,
           filename,
           buffer: buffer.toString('base64'),
-          lang,
-          mode
+          lang
         }
       });
     });

@@ -96,21 +96,21 @@ translation-started:
     - type: 'text-display'
       content: |
         I’ve started translating your file into %language%~ Please wait a moment! ⏳
-        -# File: %file_name%, Cost: %price% credits, Mode: %mode%
+        -# File: %file_name%, Cost: %price% credits
 
 translation-progress:
   components:
     - type: 'text-display'
       content: |
         I’ve already translated part of the file! I’m currently at %percent%...
-        -# File: %file_name%, Cost: %price% credits, Mode: %mode%, Status: %current%/%total%
+        -# File: %file_name%, Cost: %price% credits, Status: %current%/%total%
 
 translation-finished:
   components:
     - type: 'text-display'
       content: |
         I’ve finished translating your awesome file! 
-        -# File: %file_name%, Cost: %price% credits, Mode: %mode%
+        -# File: %file_name%, Cost: %price% credits
 
 translation-success:
   ephemeral: true
@@ -136,7 +136,7 @@ translation-failed:
         - type: 'text-display'
           content: |
             Oops, an error occurred during the translation and I couldn’t fix it!
-            -# File: %file_name%, Cost: %price% credits, Mode: %mode%
+            -# File: %file_name%, Cost: %price% credits
       accessory:
         type: 'button'
         style: 'link'

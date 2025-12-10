@@ -19,21 +19,11 @@ export default class TranslateCommand extends Command {
         option.setName('language')
           .setDescription('The language to translate the file to')
           .setRequired(true))
-      .addStringOption(option =>
-        option.setName('mode')
-          .setDescription('The mode of translation')
-          .addChoices(
-            { name: 'Basic', value: 'basic' },
-            { name: 'Advanced', value: 'advanced' },
-          )
-          .setRequired(false))
   }
 
   public async execute(interaction: ChatInputCommandInteraction<'cached'>, user: User) {
     const attachment = interaction.options.getAttachment("file", true);
     const language = interaction.options.getString("language", true);
-    const mode = interaction.options.getString("mode") || 'basic';
-
     const acceptedFileTypes = ["application/json", "text/plain", "application/javascript", "text/markdown", "text/html", "application/rtp", "application/zip", "application/x-yaml"];
     const contentTypeMainPart = attachment.contentType?.split(';')[0].trim() || "";
     if (!acceptedFileTypes.includes(contentTypeMainPart)) {
@@ -59,7 +49,7 @@ export default class TranslateCommand extends Command {
 
     const tokens = tokensResult.data.tokens;
     const filesAmount = tokensResult.data.files_amount;
-    const costPerToken = mode === 'basic' ? parseFloat(process.env.BASIC_CREDIT_PRICE!) : parseFloat(process.env.ADVANCED_CREDIT_PRICE!);
+    const costPerToken = parseFloat(process.env.CREDIT_PRICE!);
     const credits =  parseInt(Math.max(filesAmount, (tokens * costPerToken)).toFixed(0));
 
     if (user.credits < credits) {
@@ -72,7 +62,6 @@ export default class TranslateCommand extends Command {
     await interaction.editReply(await Utils.setupMessage(this.client.configs.lang.getSubsection("translate-confirmation"), [
       { searchFor: '%file_name%', replaceWith: attachment.name },
       { searchFor: '%language%', replaceWith: language },
-      { searchFor: '%mode%', replaceWith: mode },
       { searchFor: '%price%', replaceWith: credits.toString() },
       ...Utils.userVariables(user),
     ]));
@@ -92,7 +81,6 @@ export default class TranslateCommand extends Command {
           [
             { searchFor: '%file_name%', replaceWith: attachment.name },
             { searchFor: '%language%', replaceWith: language },
-            { searchFor: '%mode%', replaceWith: mode },
             { searchFor: '%price%', replaceWith: credits.toString() },
             ...Utils.userVariables(user),
           ]));
@@ -101,7 +89,6 @@ export default class TranslateCommand extends Command {
           attachment.name,
           buffer,
           language,
-          mode === 'basic' ? 'basic' : 'advanced',
           async (current, total, percent) => {
             if (current === total) return; 
             confirmationMessage.edit(await Utils.setupMessage(this.client.configs.lang.getSubsection("translation-progress"),
@@ -111,7 +98,6 @@ export default class TranslateCommand extends Command {
                 { searchFor: '%percent%', replaceWith: percent + '%' },
                 { searchFor: '%file_name%', replaceWith: attachment.name },
                 { searchFor: '%language%', replaceWith: language },
-                { searchFor: '%mode%', replaceWith: mode },
                 { searchFor: '%price%', replaceWith: credits.toString() },
                 ...Utils.userVariables(user),
               ]));
@@ -126,7 +112,6 @@ export default class TranslateCommand extends Command {
           const variables = [
             { searchFor: '%file_name%', replaceWith: attachment.name },
             { searchFor: '%language%', replaceWith: language },
-            { searchFor: '%mode%', replaceWith: mode },
             { searchFor: '%price%', replaceWith: credits.toString() },
             ...Utils.userVariables(user),
           ];
@@ -141,7 +126,6 @@ export default class TranslateCommand extends Command {
             { searchFor: '%file_name%', replaceWith: attachment.name },
             { searchFor: '%language%', replaceWith: language },
             { searchFor: '%price%', replaceWith: credits.toString() },
-            { searchFor: '%mode%', replaceWith: mode },
           ]));
         }
       }
